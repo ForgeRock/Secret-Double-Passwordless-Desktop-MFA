@@ -66,7 +66,7 @@ updates are listed in the table below.
 </tr>
 <tr class="odd">
 <td>Windows 8.1</td>
-<td>Refer to [Appendix A: Windows 8.1 Registry Update](#Appendix) </td>
+<td>Refer to <a href=#Appendix>Appendix A</a> </td>
 </tr>
 </tbody>
 </table>
@@ -141,7 +141,7 @@ ForgeRock. For example:
 
 <img src=".//media/image12.png" style="width:4.44792in;height:3.50844in" />
 
-To add the ForgeRock authenticator:
+**To add the ForgeRock authenticator**:
 
 1.  From the Octopus Management Console, open the **System Settings**
     menu and select **Authenticators**.
@@ -254,9 +254,9 @@ After integrating your corporate AD, you need to specify instructions about whic
 
 -   **Supported authenticators:** ForgeRock Authenticator can function as a primary or secondary authenticator (or both).
 
-    - When ForgeRock is a **Primary** authenticator, it can work alongside or instead of Octopus Authenticator. If both methods are enabled, users will be able to choose the authenticator they prefer.
+    - **When ForgeRock is a Primary authenticator**, it can work alongside or instead of Octopus Authenticator. If both methods are enabled, users will be able to choose the authenticator they prefer.
 
-    - When ForgeRock is a **Secondary** authenticator, users first authenticate with another authentication method (not ForgeRock). Then, information is sent to ForgeRock for additional authentication. Information that is sent includes user agent, Source IP and the authentication that was used for the primary authenticator.
+    - **When ForgeRock is a Secondary authenticator**, users first authenticate with another authentication method (not ForgeRock). Then, information is sent to ForgeRock for additional authentication. Information that is sent includes user agent, Source IP and the authentication that was used for the primary authenticator.
 
 -   **OTP settings:** To enhance authentication capabilities, Secret Double Octopus provides the option of issuing a one-time password for login. You can enable either or both of these OTP options:
 
@@ -264,7 +264,7 @@ After integrating your corporate AD, you need to specify instructions about whic
 
     - **Offline OTP:** When enabled, enrolled users can log into Windows, Mac or the User Portal using a one-time password that is stored locally. These OTPs are supplied by the Octopus Authenticator or by ForgeRock.
 
-To configure the directory’s authentication policies:
+**To configure the directory’s authentication policies**:
 
 1.  From the settings of the directory you just added, open the
     **Policy** tab and scroll to the **Authenticators** section.
@@ -279,9 +279,9 @@ To configure the directory’s authentication policies:
 
 2.  Scroll down to the **One Time Password (OTP)** section.
 
-    a. To activate online OTP, click the **Enable Online OTP** toggle button. Then, select the appropriate authenticator from the ** Online Validator** list. (You can specify either the Octopus Authenticator or the ForgeRock TOTP chain as the OTP validator.)
+    a. To activate online OTP, click the **Enable Online OTP** toggle button. Then, select the appropriate authenticator from the **Online Validator** list. (You can specify either the Octopus Authenticator or the ForgeRock TOTP chain as the OTP validator.)
 
-    b. To activate offline OTP, click the **Enable Offline OTP** toggle button. select the appropriate authenticator from the ** Offline Validator** list. (You can specify either the Octopus Authenticator or the ForgeRock TOTP chain as the OTP validator.)
+    b. To activate offline OTP, click the **Enable Offline OTP** toggle button. select the appropriate authenticator from the **Offline Validator** list. (You can specify either the Octopus Authenticator or the ForgeRock TOTP chain as the OTP validator.)
 
     c. In the **OTP Configuration** section, set the parameters of algorithm, number of digits, time period for replacement of the OTP token, and amount of time for which users are allowed to authenticate offline.
 
@@ -685,9 +685,10 @@ setup). The different authentication flows are described below.
 
 2. Once the system verifies the credentials, the user is logged into Windows.
 
-<a name="Appendix"></a> Appendix A: Windows 8.1 Registry Update
+Appendix A: Windows 8.1 Registry Update
 ================================
 
+<a name="Appendix"/>
 Follow the steps below to change the ownership of the relevant Credential Providers registry key from *TrustInstaller* to *Domain Admins*.
 
 **To update the registry key ownership:**
