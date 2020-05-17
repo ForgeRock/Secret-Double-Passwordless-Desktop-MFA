@@ -66,7 +66,7 @@ updates are listed in the table below.
 </tr>
 <tr class="odd">
 <td>Windows 8.1</td>
-<td>Refer to <a href=#Appendix>Appendix A</a> </td>
+<td>Refer to <a href=#Appendix>Appendix A: Windows 8.1 Registry Update</a> </td>
 </tr>
 </tbody>
 </table>
@@ -123,9 +123,9 @@ following preparations in the Octopus Management Console:
 
 -   Adding the ForgeRock Authenticator
 
--   Integrating the Corporate Active Directory
+-   [Integrating the Corporate Active Directory](#IntegratingAD)
 
--   Creating the Active Directory Authentication Service
+-   [Creating the Active Directory Authentication Service](#CreatingADService)
 
 Adding the ForgeRock Authenticator
 ----------------------------------
@@ -186,9 +186,8 @@ ForgeRock. For example:
 
 Integrating the Corporate Active Directory
 ------------------------------------------
-
-Follow the procedure below to integrate your AD with the Octopus
-Management Console.
+<a name="IntegratingAD"></a>
+Follow the procedure below to integrate your AD with the Octopus Management Console.
 
 **To integrate the corporate Active Directory:**
 
@@ -291,7 +290,7 @@ After integrating your corporate AD, you need to specify instructions about whic
 
 Creating the Active Directory Authentication Service
 ----------------------------------------------------
-
+<a name="CreatingADService"></a>
 Follow the steps below to create the required AD service and configure its settings.
 
 **To add and configure the Active Directory Authentication service:**
@@ -409,9 +408,9 @@ MSI is a Microsoft tool that allows easy and silent installation of Octopus Auth
 
 -   Installing the MSIUpdater Client
 
--   Configuring the MSIUpdater Application
+-   [Configuring the MSIUpdater Application](#ConfiguringMSI)
 
--   MSI Deployment of Octopus Authenticator
+-   [MSI Deployment of Octopus Authenticator](#DeployingMSI)
 
 Installing the MSIUpdater Client
 --------------------------------
@@ -455,7 +454,7 @@ When you quit the wizard, the MSIUpdater application will automatically launch, 
 
 Configuring the MSIUpdater Application
 --------------------------------------
-
+<a name="ConfiguringMSI"></a>
 The MSIUpdater, which launches automatically after you quit the MSIUpdater installer, updates the Octopus Authentication for Windows
 (64-bit or 32-bit) MSI file with the corporate Octopus Active Directory Authentication Sign-On details.
 
@@ -617,7 +616,7 @@ Alternatively**,** you can download all the service metadata at once by clicking
 
 MSI Deployment of Octopus Authenticator
 ---------------------------------------
-
+<a name="DeployingMSI"></a>
 The following sections explain how to deploy and upgrade using the MSI tool.
 
 ### Performing Silent Installation
@@ -688,8 +687,8 @@ setup). The different authentication flows are described below.
 Appendix A: Windows 8.1 Registry Update
 ================================
 
-<a name="Appendix"/>
-Follow the steps below to change the ownership of the relevant Credential Providers registry key from *TrustInstaller* to *Domain Admins*.
+<a name="Appendix"/> Follow the steps below to change the ownership of the relevant Credential Providers registry key from *TrustInstaller* to *Domain Admins*.
+
 
 **To update the registry key ownership:**
 
