@@ -1,36 +1,23 @@
-<img src=".//media/image1.png" />
-
-Introduction
+Octopus Authentication Module
 ============
 
-This document provides step-by-step instructions for installing the
-Octopus Authentication Solution together with the ForgeRock OpenAM
-Authenticator.
+Octopus Authentication is a high-assurance, passwordless authentication system engineered to address the diverse authentication needs of a real-world, working enterprise.
 
-Product Overview
-----------------
+Octopus Authentication replaces all employee passwords with a strong, password-free authentication mechanism. Our proprietary Windows Credential Provider works in conjunction with standard Active Directory interfaces to seamlessly deliver a stronger, more secure alternative to passwords.
 
-Secret Double Octopus replaces passwords altogether with a high
-assurance, password-free authentication paradigm. Using the Secret
-Double Octopus Windows Credential Provider in conjunction with standard
-interfaces to Active Directory, the password-free solution seamlessly
-replaces AD passwords with a stronger, more secure alternative. As a
-result, the security posture of the AD domain is enhanced, user
-experience and productivity improve, and password management costs are
-dramatically lowered.
+A direct effect of eliminating passwords with the Octopus Authentication Module is a significant increase in security of AD domains, edge devices and remotely accessed services. Moreover, user experience becomes standardized, resulting in enhanced productivity and accessibility, and password management and support costs are dramatically lowered.
 
 As part of the integration with ForgeRock, Secret Double Octopus allows
 users to choose ForgeRock Authenticator as an additional authentication
-method. Some supported use case scenarios are shown in the following
-figures.
+method. 
 
 <img src=".//media/image3.png" style="width:6.52399in;height:3.0625in" />
 
-ForgeRock MFA + Push Authentication
+**Workstation Authentication using ForgeRock MFA with Push Authentication**
 
 <img src=".//media/image4.png" style="width:5.59373in;height:2.7867in" />
 
-ForgeRock MFA + OTP Authentication
+**Workstation Authentication using ForgeRock MFA with OTP Authentication**
 
 <a name="Prerequisites">Prerequisites</a>
 -------------
@@ -84,13 +71,12 @@ updates are listed in the table below.
 </tbody>
 </table>
 
-System Architecture
+System Architecture Overview
 -------------------
 
-The high-level architecture is shown in the diagram below. The
-Windows/Mac credential provider authenticates the user from the
-workstation to Active Directory. Any of the following authentication
-methods can be used:
+The high-level architecture of the Octopus Authentication Module is shown in the diagram below. Windows/Mac credential providers are used for workstation authentication by Active Directory. 
+
+Any of the following authentication methods can be used:
 
 -   Passwordless + ForgeRock Push Authentication
 
@@ -100,16 +86,16 @@ methods can be used:
 
 <img src=".//media/image5.png" style="width:6.5in;height:3.62778in" />
 
-Octopus + ForgeRock Architecture
+**Octopus + ForgeRock Architecture**
 
-The following sections illustrate the architecture and authentication
-flow for different use case scenarios.
+Supported Use Cases
+-------------------
 
 #### Use Case 1: Authentication to Windows/Mac using the ForgeRock App
 
 <img src=".//media/image6.png" style="width:6.63749in;height:2.91667in" />
 
-Octopus + ForgeRock Push
+**Octopus + ForgeRock Push**
 
 <img src=".//media/image7.png" style="width:6.58333in;height:3.39998in" />
 
@@ -117,18 +103,18 @@ Octopus + ForgeRock Push
 
 <img src=".//media/image8.png" style="width:6.62426in;height:2.73958in" />
 
-Octopus + ForgeRock Integration (MFA + OTP)
+**Octopus + ForgeRock Integration (MFA + OTP)**
 
 <img src=".//media/image9.png" style="width:6in;height:4.19231in" />
 
 <img src=".//media/image10.png" style="width:6.61243in;height:3.10417in" />
 
-Octopus + Offline OTP
+**Octopus + Offline OTP**
 
 Configuring the Octopus Management Console
 ==========================================
 
-Before beginning the installation and deployment, you need to make the
+Before beginning the installation and deployment process, make sure to complete the
 following preparations in the Octopus Management Console:
 
 -   Adding the ForgeRock Authenticator
@@ -264,8 +250,7 @@ After integrating your corporate AD, you need to specify instructions about whic
 
 -   **Supported authenticators:** ForgeRock Authenticator can function as a primary or secondary authenticator (or both).
 
-    - When ForgeRock is a **Primary** authenticator, it can work alongside or instead of Octopus Authenticator. If both methods are enabled, users
-    will be able to choose the authenticator they prefer.
+    - When ForgeRock is a **Primary** authenticator, it can work alongside or instead of Octopus Authenticator. If both methods are enabled, users will be able to choose the authenticator they prefer.
 
     - When ForgeRock is a **Secondary** authenticator, users first authenticate with another authentication method (not ForgeRock). Then, information is sent to ForgeRock for additional authentication. Information that is sent includes user agent, Source IP and the authentication that was used for the primary authenticator.
 
@@ -273,7 +258,7 @@ After integrating your corporate AD, you need to specify instructions about whic
 
     - **Online OTP:** When enabled, enrolled users can log into Windows, Mac or the User Portal using a one-time password issued by either the Octopus Authenticator or by ForgeRock.
 
-    - **Offline OTP:** When enabled, enrolled users can log into Windows, Mac or the User Portal using a one-time password that is stored locally. These OTPs are supplied by the Octopus Authenticator.
+    - **Offline OTP:** When enabled, enrolled users can log into Windows, Mac or the User Portal using a one-time password that is stored locally. These OTPs are supplied by the Octopus Authenticator or by ForgeRock.
 
 To configure the directory’s authentication policies:
 
@@ -290,11 +275,11 @@ To configure the directory’s authentication policies:
 
 2.  Scroll down to the **One Time Password (OTP)** section.
 
-    To activate online OTP, click the **Enable Online OTP** toggle button. Then, select the appropriate authenticator from the **Validator** list. (You can specify either the Octopus Authenticator or the ForgeRock TOTP chain as the OTP validator.)
+    To activate online OTP, click the **Enable Online OTP** toggle button. Then, select the appropriate authenticator from the ** Online Validator** list. (You can specify either the Octopus Authenticator or the ForgeRock TOTP chain as the OTP validator.)
 
-    To activate offline OTP, click the **Enable Offline OTP** toggle button. Then, under **Offline Time**, set the period of time for which users are allowed to authenticate offline.
+    To activate offline OTP, click the **Enable Offline OTP** toggle button. select the appropriate authenticator from the ** Offline Validator** list. (You can specify either the Octopus Authenticator or the ForgeRock TOTP chain as the OTP validator.)
 
-    **Note:** Currently, only the Octopus Authentication Server can be used for offline access. You will need to enroll an additional OTP on your ForgeRock application.
+    In the **OTP Configuration** section, set the parameters of algorithm, number of digits, time period for replacement of the OTP token, and amount of time for which users are allowed to authenticate offline.
 
     <img src=".//media/image17.png" style="width:5.46692in;height:3.3125in" />
 
@@ -414,7 +399,7 @@ Follow the steps below to create the required AD service and configure its setti
 Windows Client Installation with MSIUpdater
 ===========================================
 
-MSI is a tool that allows you to deploy Octopus Authenticator for Windows in a silent installation that can be pushed to all clients by IT. This installation type should be used for enterprise and other large-scale deployments.
+MSI is a Microsoft tool that allows easy and silent installation of Octopus Authenticator for Windows on all clients. This installation option is intended for enterprise IT teams and other large-scale deployments.
 
  The following sections present the processes required for a successful  deployment with MSI:
 
@@ -429,10 +414,10 @@ Installing the MSIUpdater Client
 
 The MSIUpdater client provides an update tool for basic MSI with the Corporate Octopus AD Authentication configuration. This enables MSI silent installation to corporate Windows clients.
 
-MSIUpdater can run on any Windows machine (Windows 7, 8, 10, Server 2002, 2008, 2010 and 2012).
+MSIUpdater can run on any Windows client running the following versions: Windows 7, 8, 10, Server 2002, 2008, 2010 and 2012.
 
 Before you begin, verify that all system requirements and
-prerequisites are met. For details, refer to [Prerequisites](#Prerequisites).
+prerequisites are met. For details, refer to [Prerequisites](#Prerequisites) section of this document.
 
 **To install the MSIUpdater client:**
 
@@ -462,15 +447,13 @@ prerequisites are met. For details, refer to [Prerequisites](#Prerequisites).
 
     <img src=".//media/image29.png" style="width:3.51647in;height:2.64583in" />
 
-When you quit the wizard, the MSIUpdater application will auto launch, allowing you to configure the **Octopus Authentication for Windows.msi** with the corporate Octopus Active Directory Authentication Sign-On details. For more information, refer to Configuring the MSIUpdater Application (below).
+When you quit the wizard, the MSIUpdater application will automatically launch, allowing you to configure the **Octopus Authentication for Windows.msi** with the corporate Octopus Active Directory Authentication Sign-On details. For more information, refer to Configuring the MSIUpdater Application (below).
 
 Configuring the MSIUpdater Application
 --------------------------------------
 
-The MSIUpdater, which launches automatically after you quit the
-MSIUpdater installer, updates the Octopus Authentication for Windows
-(64-bit or 32-bit) MSI file with the corporate Octopus Active Directory
-Authentication Sign-On details.
+The MSIUpdater, which launches automatically after you quit the MSIUpdater installer, updates the Octopus Authentication for Windows
+(64-bit or 32-bit) MSI file with the corporate Octopus Active Directory Authentication Sign-On details.
 
 Before you begin working with the MSIUpdater, verify that you have access to the following elements. They can be copied or downloaded from the **Sign On** tab of the Active Directory Authentication service that you created in the Octopus Management Console.
 
@@ -607,13 +590,9 @@ Alternatively**,** you can download all the service metadata at once by clicking
     </tr>
     </thead>
     <tbody>
-    <tr class="odd">
-    <td>Enable SSO</td>
-    <td><strong>You</strong> <strong>may configure ONE of these settings only</strong>. After selecting the checkbox, enter the portal URL / 3<sup>rd</sup> party portal URL. In runtime, the portal will open in the default browser. Users will be automatically logged in and be able to view all assigned services.</td>
-    </tr>
-    <tr class="even">
-    <td>Enable Third Party SSO</td>
-    <td></td>
+      <tr class="even">
+    <td>Enable SSO / Enable Third Party SSO</td>
+    <td>**You may configure ONE of these settings only.** After selecting the checkbox, enter the portal URL / 3rd party portal URL. In runtime, the portal will open in the default browser. Users will be automatically logged in and be able to view all assigned services.</td>
     </tr>
     <tr class="odd">
     <td>Enable CP Bypass List</td>
@@ -635,8 +614,7 @@ Alternatively**,** you can download all the service metadata at once by clicking
 MSI Deployment of Octopus Authenticator
 ---------------------------------------
 
-The following sections explain how to deploy and upgrade using the MSI
-tool.
+The following sections explain how to deploy and upgrade using the MSI tool.
 
 ### Performing Silent Installation
 
@@ -665,21 +643,20 @@ components are installed as part of the deployment.
 
 ### Performing MSI Upgrade
 
+**IMPORTANT**: To successfully perform MSI upgrade, the MSI file must have the same filename as that of the original installation. The MSI updater creates an MSI file with the update date in the filename. This file needs to be renamed to match the name of the original installation file.
+
 To upgrade the MSI that is already installed, run the following command:
 
 -   Windows 64-bit:  
-    *C:\\&gt; msiexec /I " Octopus Authentication for Windows64bit –
-    xx\_xxx\_xx.msi" /q REINSTALL=ALL REINSTALLMODE=vomus*
+    *C:\\&gt; msiexec /I " Octopus Authentication For Windows 64bit.msi" REINSTALL=ALL REINSTALLMODE=vomus IS_MINOR_UPGRADE=1 /qn*
 
 -   Windows 32-bit:  
-    *C:\\&gt; msiexec /I " Octopus Authentication for Windows32bit –
-    xx\_xxx\_xx.msi" /q REINSTALL=ALL REINSTALLMODE=vomus*
+    *C:\\&gt; msiexec /I " Octopus Authentication For Windows 32bit.msi" REINSTALL=ALL REINSTALLMODE=vomus IS_MINOR_UPGRADE=1 /qn*
 
 Windows ForgeRock Authentication
 ================================
 
-Once installation is complete, the user can authenticate to a Windows
-machine using ForgeRock or a FIDO key (according to the configured
+Once installation is complete, the user can authenticate to a Windows machine using ForgeRock or a FIDO key (according to the configured
 setup). The different authentication flows are described below.
 
 <img src=".//media/image3.png" style="width:5.63542in;height:2.64539in" />
@@ -703,3 +680,8 @@ setup). The different authentication flows are described below.
 1. User enter username + Password + OTP.
 
 2. Once the system verifies the credentials, the user is logged into Windows.
+
+Octopus Support
+================================
+
+For technical assistance please contact us at support@doubleoctopus.com
