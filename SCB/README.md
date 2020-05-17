@@ -22,7 +22,7 @@ method.
 <a name="Prerequisites">Prerequisites</a>
 -------------
 
-Before beginning installation, verify that:
+Before beginning installation, verify that the following requirements are met:
 
 -   Octopus Authentication Server v4.6 is installed and operating with a
     valid enterprise certificate (for User Portal and administrator
@@ -38,7 +38,7 @@ Before beginning installation, verify that:
 
 -   Octopus Authentication for Mac is deployed (Mac users)
 
--   ForgeRock is installed and enrolled users are operating the mobile
+-   ForgeRock is installed and enrolled users are operating the mobile 
     ForgeRock Authenticator (Push or OTP)
 
 -   The Octopus Authentication for Windows MSI and MSIUpdater packages
@@ -66,7 +66,7 @@ updates are listed in the table below.
 </tr>
 <tr class="odd">
 <td>Windows 8.1</td>
-<td></td>
+<td>Refer to [Appendix A: Windows 8.1 Registry Update](#Appendix) </td>
 </tr>
 </tbody>
 </table>
@@ -107,9 +107,13 @@ Supported Use Cases
 
 <img src=".//media/image9.png" style="width:6in;height:4.19231in" />
 
+#### Use Case 3: Authentication to Windows/Mac using Offline OTP
+
 <img src=".//media/image10.png" style="width:6.61243in;height:3.10417in" />
 
 **Octopus + Offline OTP**
+
+<img src=".//media/OfflineOTPFlow.png" style="width:6in;height:4.19231in" />
 
 Configuring the Octopus Management Console
 ==========================================
@@ -275,13 +279,13 @@ To configure the directory’s authentication policies:
 
 2.  Scroll down to the **One Time Password (OTP)** section.
 
-    To activate online OTP, click the **Enable Online OTP** toggle button. Then, select the appropriate authenticator from the ** Online Validator** list. (You can specify either the Octopus Authenticator or the ForgeRock TOTP chain as the OTP validator.)
+    a. To activate online OTP, click the **Enable Online OTP** toggle button. Then, select the appropriate authenticator from the ** Online Validator** list. (You can specify either the Octopus Authenticator or the ForgeRock TOTP chain as the OTP validator.)
 
-    To activate offline OTP, click the **Enable Offline OTP** toggle button. select the appropriate authenticator from the ** Offline Validator** list. (You can specify either the Octopus Authenticator or the ForgeRock TOTP chain as the OTP validator.)
+    b. To activate offline OTP, click the **Enable Offline OTP** toggle button. select the appropriate authenticator from the ** Offline Validator** list. (You can specify either the Octopus Authenticator or the ForgeRock TOTP chain as the OTP validator.)
 
-    In the **OTP Configuration** section, set the parameters of algorithm, number of digits, time period for replacement of the OTP token, and amount of time for which users are allowed to authenticate offline.
+    c. In the **OTP Configuration** section, set the parameters of algorithm, number of digits, time period for replacement of the OTP token, and amount of time for which users are allowed to authenticate offline.
 
-    <img src=".//media/image17.png" style="width:5.46692in;height:3.3125in" />
+    <img src=".//media/OTPSettings.png" style="width:5.46692in;height:3.3125in" />
 
 1.  At the bottom of the **Policy** tab, click **Save** and then publish your changes.
 
@@ -380,7 +384,7 @@ Follow the steps below to create the required AD service and configure its setti
 
 2.  Open the **Directories** tab and select the directories that will be available for the service.
 
-    <img src=".//media/image23.png" style="width:4.50895in;height:2.44283in" />
+    <img src=".//media/DirectoriesTab.png" style="width:4.50895in;height:2.44283in" />
 
 1.  Open the **Users & Groups** tab and click **Add**.
 
@@ -417,7 +421,7 @@ The MSIUpdater client provides an update tool for basic MSI with the Corporate O
 MSIUpdater can run on any Windows client running the following versions: Windows 7, 8, 10, Server 2002, 2008, 2010 and 2012.
 
 Before you begin, verify that all system requirements and
-prerequisites are met. For details, refer to [Prerequisites](#Prerequisites) section of this document.
+prerequisites are met. For details, refer to the [Prerequisites](#Prerequisites) section of this document.
 
 **To install the MSIUpdater client:**
 
@@ -643,7 +647,7 @@ components are installed as part of the deployment.
 
 ### Performing MSI Upgrade
 
-**IMPORTANT**: To successfully perform MSI upgrade, the MSI file must have the same filename as that of the original installation. The MSI updater creates an MSI file with the update date in the filename. This file needs to be renamed to match the name of the original installation file.
+**IMPORTANT**: To successfully perform MSI upgrade, the MSI file must have the same filename as that of the original installation. The MSI updater creates an MSI file with the update date in the filename. **This file needs to be renamed to match the name of the original installation file**.
 
 To upgrade the MSI that is already installed, run the following command:
 
@@ -680,6 +684,27 @@ setup). The different authentication flows are described below.
 1. User enter username + Password + OTP.
 
 2. Once the system verifies the credentials, the user is logged into Windows.
+
+<a name="Appendix"></a> Appendix A: Windows 8.1 Registry Update
+================================
+
+Follow the steps below to change the ownership of the relevant Credential Providers registry key from *TrustInstaller* to *Domain Admins*.
+
+**To update the registry key ownership:**
+
+1.  Connect to the machine registry and navigate to:
+    *[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\Credential Providers\{60b78e88-ead8-445c-9cfd-0b87f74ea6cd}]*
+
+2. Right-click on the registry key and select **Permissions**.
+
+    <img src=".//media/RegistryKey_1.png" style="width:3.30758in;height:2.55208in" />
+    
+    Then click **Advanced** to open the **Advanced Security Settings** dialog.
+    
+1.  The *Owner* value should appear at the top of the dialog. Click **Change** and set the ownership to *Domain Admins*.
+
+    <img src=".//media/RegistryKey_2.png" style="width:3.30758in;height:2.55208in" />
+
 
 Octopus Support
 ================================
