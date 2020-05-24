@@ -263,7 +263,7 @@ After integrating your corporate AD, you need to specify instructions about whic
 
     - **Offline OTP:** When enabled, enrolled users can log into Windows, Mac or the User Portal using a one-time password that is stored locally. These OTPs are supplied by the Octopus Authenticator or by ForgeRock.
 
-**Note**: For more information about OTP enrollment, refer to [Appendix B: Enrolling Users for Octopus OTP](AppB).
+**Note**: For more information about OTP enrollment, refer to [Appendix B: Enrolling Users for Octopus OTP](#AppB).
 
 **To configure the directory’s authentication policies**:
 
@@ -657,7 +657,7 @@ If you try to upgrade using an MSI file that is named differently from the origi
 
 This error is an alert that you are trying to install an MSI file that has a different name from the one that is already installed.
 
-<img src=".//media/UpgradeError.png" style="width:6.25188in;height:3.11458in" />
+<img src=".//media/UpgradeError.jpg" style="width:6.25188in;height:3.11458in" />
 
 If you are not sure of the name of the original installation file, follow these steps:
 
