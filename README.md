@@ -7,7 +7,7 @@ Octopus Authentication replaces all employee passwords with a strong, password-f
 
 A direct effect of eliminating passwords with the Octopus Authentication Module is a significant increase in security of AD domains, edge devices and remotely accessed services. Moreover, user experience becomes standardized, resulting in enhanced productivity and accessibility, and password management and support costs are dramatically lowered.
 
-As part of the integration with ForgeRock, Secret Double Octopus allows users to choose the orgeRock Authenticator app as an additional multifactor authentication method. 
+As part of the integration with ForgeRock, Secret Double Octopus allows users to choose the ForgeRock Authenticator app as an additional multifactor authentication method. 
 
 <img src=".//media/image3.png" style="width:6.52399in;height:3.0625in" />
 
@@ -262,6 +262,8 @@ After integrating your corporate AD, you need to specify instructions about whic
     - **Online OTP:** When enabled, enrolled users can log into Windows, Mac or the User Portal using a one-time password issued by either the Octopus Authenticator or by ForgeRock.
 
     - **Offline OTP:** When enabled, enrolled users can log into Windows, Mac or the User Portal using a one-time password that is stored locally. These OTPs are supplied by the Octopus Authenticator or by ForgeRock.
+
+**Note**: For more information about OTP enrollment, refer to [Appendix B: Enrolling Users for Octopus OTP](AppB).
 
 **To configure the directory’s authentication policies**:
 
@@ -655,7 +657,7 @@ If you try to upgrade using an MSI file that is named differently from the origi
 
 This error is an alert that you are trying to install an MSI file that has a different name from the one that is already installed.
 
-
+<img src=".//media/UpgradeError.png" style="width:6.25188in;height:3.11458in" />
 
 If you are not sure of the name of the original installation file, follow these steps:
 
@@ -722,6 +724,45 @@ Appendix A: Windows 8.1 Registry Update
 
     <img src=".//media/RegistryKey_2.png" style="width:3.30758in;height:2.55208in" />
 
+Appendix B: Enrolling Users for Octopus OTP
+================================
+
+<a name="AppB"/> The following sections explain how to send Octopus OTP enrollment invitations from the Octopus Management Console. You can send invitations to all members of a group in a bulk operation, or you can invite specific individual users.
+
+Sending Enrollment Invitations to a Group
+---------------------------------------
+You can send group invitations quickly and easily using the Quick Actions menu for the relevant group. 
+
+**To send Octopus OTP enrollment invitations to a group:**
+
+1.  From the Management Console, select the **Manage Users** menu. On the left side of the page, expand the directory tree and navigate to the relevant node.
+
+    <img src=".//media/DirectoriesList.png" style="width:3.02208in;height:4.17652in" />
+
+1.  In the row of the relevant group, click the Actions icon and  select **Send Invitation > OTP Authenticator**.  
+
+     <img src=".//media/SendInvitation_Group.png" style="width:3.30757in;height:2.18819in" />
+
+Sending Enrollment Invitations to Individual Users
+---------------------------------------
+
+You can send an enrollment invitation to a user directly from the Users List, or from the user’s settings.  
+
+**To send an enrollment invitation from the Users list:**
+
+-   In the row of the relevant user, click the Actions icon and  select **Send Invitation > OTP Authenticator**.
+
+    <img src=".//media/EnrollUser_1.png" style="width:3.30757in;height:2.18819in" />
+
+**To send an enrollment invitation from the user's settings:**
+ 
+1.  From the Users List, click the Edit icon to view the user's settings.
+
+    <img src=".//media/UserEditIcon.png" style="width:3.02208in;height:4.17652in" />
+
+1.  At the top of the page, click the Actions icon and  select **Send Invitation > OTP Authenticator**.  
+
+    <img src=".//media/EnrollUser_2.png" style="width:3.30757in;height:2.18819in" />
 
 Octopus Support
 ================================
