@@ -7,9 +7,7 @@ Octopus Authentication replaces all employee passwords with a strong, password-f
 
 A direct effect of eliminating passwords with the Octopus Authentication Module is a significant increase in security of AD domains, edge devices and remotely accessed services. Moreover, user experience becomes standardized, resulting in enhanced productivity and accessibility, and password management and support costs are dramatically lowered.
 
-As part of the integration with ForgeRock, Secret Double Octopus allows
-users to choose ForgeRock Authenticator as an additional authentication
-method. 
+As part of the integration with ForgeRock, Secret Double Octopus allows users to choose the orgeRock Authenticator app as an additional multifactor authentication method. 
 
 <img src=".//media/image3.png" style="width:6.52399in;height:3.0625in" />
 
@@ -24,7 +22,7 @@ method.
 
 Before beginning installation, verify that the following requirements are met:
 
--   Octopus Authentication Server v4.6 is installed and operating with a
+-   Octopus Authentication Server v4.6 (or higher) is installed and operating with a
     valid enterprise certificate (for User Portal and administrator
     access via HTTPS)
 
@@ -33,7 +31,7 @@ Before beginning installation, verify that the following requirements are met:
 
 -   Corporate domain Windows machines (user PCs) are available
 
--   Octopus Authentication for Windows MSI wrapper is deployed on all
+-   Octopus Authentication for Windows is deployed on all
     corporate Windows machines (Windows users)
 
 -   Octopus Authentication for Mac is deployed (Mac users)
@@ -187,7 +185,9 @@ ForgeRock. For example:
 Integrating the Corporate Active Directory
 ------------------------------------------
 <a name="IntegratingAD"></a>
-Follow the procedure below to integrate your AD with the Octopus Management Console.
+Follow the procedure below to integrate your corporate directory with the Octopus Management Console.
+
+**Note**: The procedure uses an Active Directory type example. You can use the same procedure to integrate a ForgeRock directory type by selecting **ForgeRock** in Step 2. The rest of the steps are the same.
 
 **To integrate the corporate Active Directory:**
 
@@ -287,6 +287,9 @@ After integrating your corporate AD, you need to specify instructions about whic
     <img src=".//media/OTPSettings.png" style="width:5.46692in;height:3.3125in" />
 
 1.  At the bottom of the **Policy** tab, click **Save** and then publish your changes.
+
+**Note**: When an additional primary authenticator is selected, that authenticator needs to be selected in the Windows MSI Updater as well. This will allow users to choose that primary authentication method on their Windows workstations.
+For more information, refer to [Configuring the MSIUpdater Client](#ConfiguringMSI).
 
 Creating the Active Directory Authentication Service
 ----------------------------------------------------
@@ -408,7 +411,7 @@ MSI is a Microsoft tool that allows easy and silent installation of Octopus Auth
 
 -   Installing the MSIUpdater Client
 
--   [Configuring the MSIUpdater Application](#ConfiguringMSI)
+-   [Configuring the MSIUpdater Client](#ConfiguringMSI)
 
 -   [MSI Deployment of Octopus Authenticator](#DeployingMSI)
 
@@ -450,9 +453,9 @@ prerequisites are met. For details, refer to the [Prerequisites](#Prerequisites)
 
     <img src=".//media/image29.png" style="width:3.51647in;height:2.64583in" />
 
-When you quit the wizard, the MSIUpdater application will automatically launch, allowing you to configure the **Octopus Authentication for Windows.msi** with the corporate Octopus Active Directory Authentication Sign-On details. For more information, refer to Configuring the MSIUpdater Application (below).
+When you quit the wizard, the MSIUpdater application will automatically launch, allowing you to configure the **Octopus Authentication for Windows.msi** with the corporate Octopus Active Directory Authentication Sign-On details. For more information, refer to Configuring the MSIUpdater Client (below).
 
-Configuring the MSIUpdater Application
+Configuring the MSIUpdater Client
 --------------------------------------
 <a name="ConfiguringMSI"></a>
 The MSIUpdater, which launches automatically after you quit the MSIUpdater installer, updates the Octopus Authentication for Windows
@@ -467,7 +470,7 @@ Before you begin working with the MSIUpdater, verify that you have access to the
 -   **X.509 Certificate:** Click **Download** to download the
     **cert.pem** file.
 
-Alternatively**,** you can download all the service metadata at once by clicking **SERVICE METADATA**. The metadata will be saved in the **Metadata.xml** file.
+Alternatively, you can download all the service metadata at once by clicking **SERVICE METADATA**. The metadata will be saved in the **Metadata.xml** file.
 
 <img src=".//media/image30.png" style="width:5.53043in;height:3.70586in" />
 
@@ -485,7 +488,7 @@ Alternatively**,** you can download all the service metadata at once by clicking
 
     <img src=".//media/image32.png" style="width:3.30757in;height:2.18819in" />
 
-1.  If you want to use multi-factor authentication from Active Directory when logging into Windows, select the **Multi-Factor Authentication (MFA)** checkbox. When MFA is activated, users will need to enter their AD passwords in order to receive a push notification from Octopus, ForgeRock or OKTA Authenticators.
+1.  If you want to use multi-factor authentication from Active Directory when logging into Windows, select the **Multi-Factor Authentication (MFA)** checkbox. When MFA is activated, users will need to enter their AD passwords in order to receive a push notification from Octopus, ForgeRock or OKTA Authenticators. If the checkbox is *not* selected, users will have passwordless authentication.
 
     >**Note: In order to successfully use a FIDO key with MFA, the key must not have an associated PIN**.
 
@@ -517,7 +520,7 @@ Alternatively**,** you can download all the service metadata at once by clicking
     </tr>
     <tr class="odd">
     <td>OTP</td>
-    <td>When using MFA, select this checkbox to enable authentication with ForgeRock OTP or Octopus-generated OTP.</td>
+    <td>This option enables authentication with ForgeRock OTP or Octopus-generated OTP. In order to select the checkbox, the <b>Multi-Factor Authentication (MFA)</b> checkbox must be selected.</td>
     </tr>
     </tbody>
     </table>
@@ -556,11 +559,11 @@ Alternatively**,** you can download all the service metadata at once by clicking
     </tr>
     <tr class="odd">
     <td>Change Password on RDP</td>
-    <td>When selected, password changes on RDP session are allowed. This option is relevant mainly for admin users using RDP sessions that do not login to Windows machines.</td>
+    <td>When selected, password changes on RDP sessions are allowed. This option is relevant mainly for admin users using RDP sessions that do not login to Windows machines. This option is relevant to passwordless authentication only.</td>
     </tr>
     <tr class="even">
     <td>Change Password on Unlock</td>
-    <td>When selected, password changes are allowed on Unlock as well as on Login to the workstation.</td>
+    <td>When selected, password changes are allowed on Unlock as well as on Login to the workstation. This option is relevant to passwordless authentication only.</td>
     </tr>
     <tr class="odd">
     <td>POC Mode</td>
@@ -572,7 +575,7 @@ Alternatively**,** you can download all the service metadata at once by clicking
     </tr>
     <tr class="odd">
     <td>Bypass MFA on unlock when connected to AD</td>
-    <td>When selected, users connected to the enterprise network who have already authenticated with MFA are not required to authenticate with 2<sup>nd</sup> factor again when unlocking the workstation.</td>
+    <td>When selected, users connected to the enterprise network who have already authenticated with MFA are not required to authenticate with 2<sup>nd</sup> factor again when unlocking the workstation. This behavior continues for an unlimited period of time, provided that users remain inside the network.</td>
     </tr>
     <tr class="even">
     <td>Force Lock After Offline OTP</td>
@@ -595,7 +598,7 @@ Alternatively**,** you can download all the service metadata at once by clicking
     <tbody>
       <tr class="even">
     <td>Enable SSO / Enable Third Party SSO</td>
-    <td>**You may configure ONE of these settings only.** After selecting the checkbox, enter the portal URL / 3rd party portal URL. In runtime, the portal will open in the default browser. Users will be automatically logged in and be able to view all assigned services.</td>
+    <td><b>You may configure ONE of these settings only.</b> After selecting the checkbox, enter the portal URL / 3rd party portal URL. In runtime, the portal will open in the default browser. Users will be automatically logged in and be able to view all assigned services.</td>
     </tr>
     <tr class="odd">
     <td>Enable CP Bypass List</td>
@@ -648,7 +651,21 @@ components are installed as part of the deployment.
 
 **IMPORTANT**: To successfully perform MSI upgrade, the MSI file must have the same filename as that of the original installation. The MSI updater creates an MSI file with the update date in the filename. **This file needs to be renamed to match the name of the original installation file**.
 
-To upgrade the MSI that is already installed, run the following command:
+If you try to upgrade using an MSI file that is named differently from the original installation file, the following error message will appear: *Error 1316: The specified account already exists*
+
+This error is an alert that you are trying to install an MSI file that has a different name from the one that is already installed.
+
+
+
+If you are not sure of the name of the original installation file, follow these steps:
+
+1. Navigate to **C:\Windows\Installer**
+
+1. Open the following file: **SourceHash{F88FAA40-72B9-4CE0-88DA-6592EF361C94}**
+
+2. Search for the name of the file that was used for installation. You will find it at the end of the SourceHash file.
+
+To upgrade the MSI, run the following command:
 
 -   Windows 64-bit:  
     *C:\\&gt; msiexec /I " Octopus Authentication For Windows 64bit.msi" REINSTALL=ALL REINSTALLMODE=vomus IS_MINOR_UPGRADE=1 /qn*
