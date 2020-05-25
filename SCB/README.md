@@ -89,44 +89,43 @@ selecting **ForgeRock** in Step 2. The rest of the steps are the same.
 
     The **New** **Directory** page opens.
 
-7.  Configure the following parameters, based on your corporate AD
-    settings:
+7.  Configure the following parameters, based on your corporate AD settings:
 
     <table>
-<thead>
-<tr class="header">
-<th><strong>Parameter</strong></th>
-<th><strong>Value / Notes</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Name</td>
-<td>Corporate Active Directory Server name</td>
-</tr>
-<tr class="even">
-<td>Base DN</td>
-<td>Active Directory Distinguished Name; Active Directory top tree level, from where a server will search for users<br />
-(e.g., dc=&lt;AD name&gt;,dc=com)</td>
-</tr>
-<tr class="odd">
-<td>User DN</td>
-<td>Active Directory Administrator User DN string (e.g., cn=administrator=users, dc=&lt;AD name&gt;,dc=com)</td>
-</tr>
-<tr class="even">
-<td>Password</td>
-<td>Active Directory Administrator Principal’s password</td>
-</tr>
-<tr class="odd">
-<td>Host Name/URL</td>
-<td>Corporate Active Directory URL (LDAP/LDAPS) and port</td>
-</tr>
-<tr class="even">
-<td>Upload Certificate</td>
-<td>Active Directory LDAPS 64-base encoded root CA. If you are using LDAPS, click and upload the certificate file.</td>
-</tr>
-</tbody>
-</table>
+    <thead>
+    <tr class="header">
+    <th><strong>Parameter</strong></th>
+    <th><strong>Value / Notes</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td>Name</td>
+    <td>Corporate Active Directory Server name</td>
+    </tr>
+    <tr class="even">
+    <td>Base DN</td>
+    <td>Active Directory Distinguished Name; Active Directory top tree level, from where a server will search for users<br />
+    (e.g., dc=&lt;AD name&gt;,dc=com)</td>
+    </tr>
+    <tr class="odd">
+    <td>User DN</td>
+    <td>Active Directory Administrator User DN string (e.g., cn=administrator=users, dc=&lt;AD name&gt;,dc=com)</td>
+    </tr>
+    <tr class="even">
+    <td>Password</td>
+    <td>Active Directory Administrator Principal’s password</td>
+    </tr>
+    <tr class="odd">
+    <td>Host Name/URL</td>
+    <td>Corporate Active Directory URL (LDAP/LDAPS) and port</td>
+    </tr>
+    <tr class="even">
+    <td>Upload Certificate</td>
+    <td>Active Directory LDAPS 64-base encoded root CA. If you are using LDAPS, click and upload the certificate file.</td>
+    </tr>
+    </tbody>
+    </table>
 
     ![](.//media/image4.png)
 
@@ -149,11 +148,9 @@ Follow the steps below to create the required REST API service and
 configure its settings.
 
 **To add and configure the REST API service:**
+1.  From the Octopus Management Console, open the **Services** menu and click **Add Service**.
 
-1.  From the Octopus Management Console, open the **Services** menu and
-    click **Add Service**.
-
-12. In the **REST API** tile, click **Add**.
+1. In the **REST API** tile, click **Add**.
 
     ![](.//media/image6.png)
 
@@ -161,18 +158,17 @@ configure its settings.
 
     ![](.//media/image7.png)
 
-13. Review the settings in the **General Info** tab. If you make any
-    changes, click **Save**.
+1. Review the settings in the **General Info** tab. If you make any changes, click **Save**.
 
-    | **Setting**           | **Value / Notes**                                                                                                                    |
-| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| Service Name / Issuer | Change the default value if desired.                                                                                                 |
-| Description           | Enter a brief note about the service if desired.                                                                                     |
-| Display Icon          | This icon will be displayed on the Login page for the service. To change the default icon, click and upload the icon of your choice. |
+    | **Setting**           | **Value / Notes**                                                                      |
+    | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+    | Service Name / Issuer | Change the default value if desired.                                                                                                 |
+    | Description           | Enter a brief note about the service if desired.                                                                                     |
+    | Display Icon          | This icon will be displayed on the Login page for the service. To change the default icon, click and upload the icon of your choice. |
 
     ![](.//media/image8.png)
 
-14. Open the **Parameters** tab. From the **Octopus Authentication
+1. Open the **Parameters** tab. From the **Octopus Authentication
     Login** dropdown list, select the credential type that will be sent
     by the user for the authentication (usually **Email**).
 
@@ -180,15 +176,15 @@ configure its settings.
 
     Then, click **Save**.
 
-15. Open the **Sign On** tab and review the following settings:
+1. Open the **Sign On** tab and review the following settings:
 
-    |       **Setting**                       |            **Value / Notes**                                                                                                                                                                  
-| ------------------------------ |                                                                                                                          |
-| Authentication Token Timeout   | Used as part of the REST API communication. It sets the token timeout for an authentication request from the application.                            |
-| Rest Payload Signing Algorithm | Method with which the X.509 certificate was generated.                                                                                               |
-| X.509 Certificate              | The service’s certificate file, which will be used as part of the Windows Credential provider installation. Click **Download** to download the file. |
-| REST Endpoint URL              | Access URL from the Windows client to the Octopus Authentication Server.                                                                             |
-| Service Key                    | An identifier for the service. This key is one of the parameters required for the Windows client to connect to the Octopus Authentication Server.    |
+    |       **Setting**                       |            **Value / Notes**        |                                                                                                                                                          
+    | ------------------------------ |  ------------------------------   |
+    | Authentication Token Timeout   | Used as part of the REST API communication. It sets the token timeout for an authentication request from the application.                            |
+    | Rest Payload Signing Algorithm | Method with which the X.509 certificate was generated.                                                                                               |
+    | X.509 Certificate              | The service’s certificate file, which will be used as part of the Windows Credential provider installation. Click **Download** to download the file. |
+    | REST Endpoint URL              | Access URL from the Windows client to the Octopus Authentication Server.                                                                             |
+    | Service Key                    | An identifier for the service. This key is one of the parameters required for the Windows client to connect to the Octopus Authentication Server.    |
 
     ![](.//media/image10.png)
 
@@ -206,11 +202,9 @@ configure its settings.
 19. For each directory, select the groups and users to be added to the
     service.
 
-    After making your selections, click **Save** (in the upper right corner)
-to close the dialog.
+    After making your selections, click **Save** (in the upper right corner) to close the dialog.
 
-    The groups and users you selected are listed in the **Users & Groups**
-tab.
+    The groups and users you selected are listed in the **Users & Groups** tab.
 
     ![](.//media/image12.png)
 
@@ -230,23 +224,19 @@ operational, and the relevant users need to be enrolled with the Octopus
 Authenticator Mobile App.
 
 **To install Octopus Authentication Node:**
+1.  Download the latest version of the SDO integration (**octopusNode-1.0.0.jar**) from ForgeRock MarketPlace.
 
-1.  Download the latest version of the SDO integration
-    (**octopusNode-1.0.0.jar**) from ForgeRock MarketPlace.
+1.  Copy the .jar file into the **../web-container/webapps/openam/WEB-INF/lib** directory where your AM console is deployed.
 
-21. Copy the .jar file into the
-    **../web-container/webapps/openam/WEB-INF/lib** directory where your
-    AM console is deployed.
-
-22. Restart the web container to pick up the new node.
+2.  Restart the web container to pick up the new node.
 
     After the restart, the node will appear in the Authentication Trees **Components** palette.
 
-23. Add Octopus Authentication Node to your environment. For example:
+3.  Add Octopus Authentication Node to your environment. For example:
 
     ![](.//media/image13.png)
 
-24. Continue by configuring node parameters, as described below.
+4.  Continue by configuring node parameters, as described below.
 
 ## Configuring Octopus Authentication Node
 
@@ -259,9 +249,9 @@ The values for the **Service Key**, **Service URL** and **Service
 Certificate** can be copied from the **Sign On** tab of the REST API
 service that you created in the Octopus Management Console:
 
-  - **REST Endpoint URL:** Click the Copy icon to copy the value.
+ - **REST Endpoint URL:** Click the Copy icon to copy the value.
 
-  - **X.509 Certificate and Service Key:** Click **View**. Then, in the
+ - **X.509 Certificate and Service Key:** Click **View**. Then, in the
     popup that opens, click **Copy** to copy the value.
 
 ![](.//media/image15.png)
