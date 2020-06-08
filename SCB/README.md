@@ -180,11 +180,13 @@ configure its settings.
 1.  If you have integrated a **ForgeRock** directory type, and you want to use a ForgeRock-specific identifier for user authentication,    follow these steps to override the Octopus Authentication Login parameter selected in Step 4:
 
     a. At the top of the **Parameters** tab, open the **Service Parameters** list and select the relevant directory. For example:
+    
      ![](.//media/ServiceParameters_FR.png)
     
     **Note**: If the directory is disabled, enable it by opening the **Directories** tab, selecting the directory and clicking **Save**.
   
     b. Select the checkbox next to the **Octopus Authentication Login** parameter. Then, open the dropdown list and select the value to   override the default parameter.
+    
     ![](.//media/OverrideParameter_FRDirectory.png)
     
     c. At the bottom of the **Parameters** tab, click **Save**.
