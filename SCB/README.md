@@ -33,6 +33,7 @@ have been met:
 
   - Octopus Authentication Node has been downloaded from ForgeRock
     Marketplace
+  - The **gson.jar** file has been downloaded from Google     
 
 ## <a name="architecture"></a>System Architecture Overview
 
@@ -61,35 +62,35 @@ Before installation and configuring Octopus Authentication Node, you
 need to make the following preparations in the Octopus Management
 Console:
 
-  - Integrating the Corporate Active Directory
+  - Integrating Your Corporate Directory
 
   - [Creating the REST API Service](#service)
 
-## Integrating the Corporate Active Directory
+## Integrating Your Corporate Directory
 
 Follow the steps below to integrate your corporate directory with
 the Octopus Management Console.
 
-**Note:** The procedure uses an Active Directory type example. You can
-use the same procedure to integrate a ForgeRock directory type by
-selecting **ForgeRock** in Step 2. The rest of the steps are the same.
+You can integrate either an **Active Directory** type or a **ForgeRock directory** type.
 
-**To integrate the corporate Active Directory:**
+**To integrate your corporate Directory:**
 
 1.  From the Octopus Management Console, open the **System Settings**
     menu and select **Directories**.
 5.  Click **Add Directory** to open the **Select Directory Type**
-    dialog. **Active Directory** is the default selection.
+    dialog. From the **Directory Type** dropdown list, select either **Active Directory** or **ForgeRock**.
+    
+    ![](.//media/DirectoryType_1.png)
 
-    If you want directory users to be synced automatically, enable the **Directory Sync** toggle button. When Directory Sync is disabled (as in the example below) you will need to import users manually. (For more information, refer to the Octopus Management Console Admin Guide.)
+2.  If you want directory users to be synced automatically, enable the **Directory Sync** toggle button. When Directory Sync is disabled     (as in the example below) you will need to import users manually. (For more information, refer to the Octopus Management Console    Admin Guide.)
 
-    ![](.//media/image3.png)
+    ![](.//media/DirectoryType_2.png)
 
 6.  Click **Select**.
 
-    The **New** **Directory** page opens.
+    The **New Directory** page opens.
 
-7.  Configure the following parameters, based on your corporate AD settings:
+7.  Configure the following parameters, based on your corporate Directory settings:
 
     <table>
     <thead>
@@ -101,28 +102,28 @@ selecting **ForgeRock** in Step 2. The rest of the steps are the same.
     <tbody>
     <tr class="odd">
     <td>Name</td>
-    <td>Corporate Active Directory Server name</td>
+    <td>Corporate Directory Server name</td>
     </tr>
     <tr class="even">
     <td>Base DN</td>
-    <td>Active Directory Distinguished Name; Active Directory top tree level, from where a server will search for users<br />
+    <td>Directory Distinguished Name; Directory top tree level, from where a server will search for users<br />
     (e.g., dc=&lt;AD name&gt;,dc=com)</td>
     </tr>
     <tr class="odd">
     <td>User DN</td>
-    <td>Active Directory Administrator User DN string (e.g., cn=administrator=users, dc=&lt;AD name&gt;,dc=com)</td>
+    <td>Directory Administrator User DN string (e.g., cn=administrator=users, dc=&lt;AD name&gt;,dc=com)</td>
     </tr>
     <tr class="even">
     <td>Password</td>
-    <td>Active Directory Administrator Principal’s password</td>
+    <td>Directory Administrator Principal’s password</td>
     </tr>
     <tr class="odd">
     <td>Host Name/URL</td>
-    <td>Corporate Active Directory URL (LDAP/LDAPS) and port</td>
+    <td>Corporate Directory URL (LDAP/LDAPS) and port</td>
     </tr>
     <tr class="even">
     <td>Upload Certificate</td>
-    <td>Active Directory LDAPS 64-base encoded root CA. If you are using LDAPS, click and upload the certificate file.</td>
+    <td>Directory LDAPS 64-base encoded root CA. If you are using LDAPS, click and upload the certificate file.</td>
     </tr>
     </tbody>
     </table>
@@ -175,6 +176,18 @@ configure its settings.
     ![](.//media/image9.png)
 
     Then, click **Save**.
+    
+1.  If you have integrated a **ForgeRock** directory type, and you want to use a ForgeRock-specific identifier for user authentication,    follow these steps to override the Octopus Authentication Login parameter selected in Step 4:
+
+    a. At the top of the **Parameters** tab, open the **Service Parameters** list and select the relevant directory. For example:
+     ![](.//media/ServiceParameters_FR.png)
+    
+    **Note**: If the directory is disabled, enable it by opening the **Directories** tab, selecting the directory and clicking **Save**.
+  
+    b. Select the checkbox next to the **Octopus Authentication Login** parameter. Then, open the dropdown list and select the value to   override the default parameter.
+    ![](.//media/OverrideParameter_FRDirectory.png)
+    
+    c. At the bottom of the **Parameters** tab, click **Save**.
 
 1. Open the **Sign On** tab and review the following settings:
 
