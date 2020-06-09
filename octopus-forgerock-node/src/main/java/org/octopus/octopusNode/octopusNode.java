@@ -16,18 +16,10 @@
 
 package org.octopus.octopusNode;
 
-import javax.inject.Inject;
-
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.google.inject.assistedinject.Assisted;
-
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
-import java.security.KeyStore;
-import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.PublicKey;
 import java.security.Signature;
@@ -36,6 +28,8 @@ import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.util.Base64;
+
+import javax.inject.Inject;
 
 import org.apache.http.client.config.CookieSpecs;
 import org.apache.http.client.config.RequestConfig;
@@ -49,19 +43,21 @@ import org.forgerock.openam.annotations.sm.Attribute;
 import org.forgerock.openam.auth.node.api.AbstractDecisionNode;
 import org.forgerock.openam.auth.node.api.Action;
 import org.forgerock.openam.auth.node.api.Node;
-import org.forgerock.openam.auth.node.api.NodeProcessException;
 import org.forgerock.openam.auth.node.api.SharedStateConstants;
 import org.forgerock.openam.auth.node.api.TreeContext;
-import org.forgerock.openam.core.CoreWrapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.inject.assistedinject.Assisted;
 
 @Node.Metadata(outcomeProvider = AbstractDecisionNode.OutcomeProvider.class, configClass = octopusNode.Config.class)
 public class octopusNode extends AbstractDecisionNode {
     private final Logger logger = LoggerFactory.getLogger("amAuth");
     private final String serviceKey;
     private final String serviceUrl;
-    private final String serviceCert;
     private PublicKey publicKey;
 
     /**
@@ -85,12 +81,11 @@ public class octopusNode extends AbstractDecisionNode {
     }
 
     @Inject
-    public octopusNode(@Assisted final Config config, final CoreWrapper coreWrapper)
-            throws NodeProcessException, KeyStoreException, CertificateException {
+    public octopusNode(@Assisted final Config config) throws CertificateException {
         this.serviceKey = config.serviceKey();
         this.serviceUrl = config.serviceUrl();
-        this.serviceCert = config.serviceCert();
-        StringBuilder builder = new StringBuilder(this.serviceCert);
+        String serviceCert = config.serviceCert();
+        StringBuilder builder = new StringBuilder(serviceCert);
         int first = builder.indexOf(" ");
         int last = builder.lastIndexOf(" ");
         builder.setCharAt(first, '#');
@@ -98,7 +93,9 @@ public class octopusNode extends AbstractDecisionNode {
         String formatted = builder.toString();
         formatted = formatted.replaceAll(" ", "\n");
         formatted = formatted.replaceAll("#", " ");
+        //TODO prefer to use debug for these outputs
         logger.error(formatted);
+        //TODO this should be abstracted out and stored in a singleton (this constructor is called every time this node in invoked)
         CertificateFactory cf = CertificateFactory.getInstance("X.509");
         InputStream targetStream = new ByteArrayInputStream(formatted.getBytes());
         Certificate cert = cf.generateCertificate(targetStream);
@@ -106,9 +103,11 @@ public class octopusNode extends AbstractDecisionNode {
     }
 
     @Override
-    public Action process(final TreeContext context) throws NodeProcessException {
+    public Action process(final TreeContext context) {
+        //TODO prefer to use debug for these outputs
         logger.error("process called");
         final String username = context.sharedState.get(SharedStateConstants.USERNAME).asString().toLowerCase();
+        //TODO prefer to use debug for these outputs
         logger.error("process username: " + username);
         try {
             return goTo(octopusAuth(username)).build();
@@ -130,6 +129,7 @@ public class octopusNode extends AbstractDecisionNode {
     }
 
     private String preauthRequest(final CloseableHttpClient client) throws Exception {
+        //TODO Recommend using ForgeRock's built in HTTP client so that you get built in connection pooling
         final HttpPost httpPost = new HttpPost(this.serviceUrl + "/1/preauth");
         httpPost.addHeader("Content-Type", "application/json");
         final String requestBody = "{\"serviceKey\": \"" + this.serviceKey + "\"}";
@@ -154,42 +154,43 @@ public class octopusNode extends AbstractDecisionNode {
         final String algorithm = algorithmElement.getAsString();
 
         boolean sigResult = checkSignature(payload, signature, algorithm);
+        //TODO prefer to use debug for these outputs
         logger.error("preauth signature verification result: " + sigResult);
         if (!sigResult) {
             throw new Exception("preauth invalid signature");
         }
 
         final byte[] decoded = Base64.getDecoder().decode(payload);
-        final String decodedString = new String(decoded, "UTF-8");
+        final String decodedString = new String(decoded, StandardCharsets.UTF_8);
 
         // logger.error("decoded payload: " + decodedString);
 
         final JsonElement preauthTree = jsonParser.parse(decodedString);
         final JsonObject preauthObjString = preauthTree.getAsJsonObject();
         final JsonElement authTokenElement = preauthObjString.get("authToken");
-        final String authToken = authTokenElement.getAsString();
 
-        return authToken;
+        return authTokenElement.getAsString();
     }
 
+    //TODO Password not used
     private String authRequest(final CloseableHttpClient client, final String authToken, final String username,
             final String password) throws Exception {
 
         final HttpPost httpPost = new HttpPost(this.serviceUrl + "/1/auth");
         httpPost.addHeader("Content-Type", "application/json");
-        final StringBuilder authJson = new StringBuilder();
-        authJson.append("{");
-        authJson.append("\"authToken\": \"" + authToken + "\",");
-        authJson.append("\"username\": \"" + username + "\",");
-        authJson.append("\"message\": \"hello from plugin\"");
-        authJson.append("}");
-        final StringEntity entity = new StringEntity(authJson.toString());
-        httpPost.setEntity(entity);
+        String authJson = "{" +
+                "\"authToken\": \"" + authToken + "\"," +
+                "\"username\": \"" + username + "\"," +
+                //TODO message should be configurable via a ForgeRock Configuration
+                "\"message\": \"hello from plugin\"" +
+                "}";
+        httpPost.setEntity(new StringEntity(authJson));
         final CloseableHttpResponse response = client.execute(httpPost);
         final String stringBody = EntityUtils.toString(response.getEntity());
 
         // logger.error("auth response string: " + stringBody);
 
+        //TODO Duplicated code, extract out as method
         final JsonParser jsonParser = new JsonParser();
         final JsonElement responseObj = jsonParser.parse(stringBody);
         final JsonObject jsonObject = responseObj.getAsJsonObject();
@@ -205,22 +206,22 @@ public class octopusNode extends AbstractDecisionNode {
         final String algorithm = algoElement.getAsString();
 
         boolean sigResult = checkSignature(payload, signature, algorithm);
+        //TODO prefer to use debug for these outputs
         logger.error("auth signature verification result: " + sigResult);
         if (!sigResult) {
             throw new Exception("auth invalid signature");
         }
 
         final byte[] decoded = Base64.getDecoder().decode(payload);
-        final String decodedString = new String(decoded, "UTF-8");
+        final String decodedString = new String(decoded, StandardCharsets.UTF_8);
 
         // logger.error("decoded payload: " + decodedString);
 
         final JsonElement authTree = jsonParser.parse(decodedString);
         final JsonObject authObjString = authTree.getAsJsonObject();
         final JsonElement authStatusElement = authObjString.get("authStatus");
-        final String status = authStatusElement.getAsString();
 
-        return status;
+        return authStatusElement.getAsString();
     }
 
     private boolean checkSignature(String payload, String sig, String algorithm)
