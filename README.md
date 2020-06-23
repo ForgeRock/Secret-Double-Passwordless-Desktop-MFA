@@ -121,7 +121,7 @@ following preparations in the Octopus Management Console:
 
 -   Adding the ForgeRock Authenticator
 
--   [Integrating the Corporate Active Directory](#IntegratingAD)
+-   [Integrating Your Corporate Directory](#IntegratingAD)
 
 -   [Creating the Active Directory Authentication Service](#CreatingADService)
 
@@ -182,28 +182,30 @@ ForgeRock. For example:
 
     **Note**: You can add several ForgeRock authenticators pointing to different nodes/chains, and use each one for a different directory of users or OU. Each directory can be assigned to one authenticator for primary authentication and another authenticator for the OTP chain.
 
-Integrating the Corporate Active Directory
+Integrating Your Corporate Directory
 ------------------------------------------
 <a name="IntegratingAD"></a>
 Follow the procedure below to integrate your corporate directory with the Octopus Management Console.
 
-**Note**: The procedure uses an Active Directory type example. You can use the same procedure to integrate a ForgeRock directory type by selecting **ForgeRock** in Step 2. The rest of the steps are the same.
+You can integrate either an **Active Directory** type or a **ForgeRock directory** type.
 
-**To integrate the corporate Active Directory:**
+**To integrate your corporate Directory:**
 
 1.  From the Octopus Management Console, open the **System Settings** menu and select **Directories**.
 
-1.  Click **Add Directory** to open the **Select Directory Type** dialog. **Active Directory** is the default selection.
+1.  Click **Add Directory** to open the **Select Directory Type** dialog. From the **Directory Type** dropdown list, select either **Active Directory** or **ForgeRock**.
 
-    If you want directory users to be synced automatically, enable the **Directory Sync** toggle button. When Directory Sync is disabled (as in the example below) you will need to import users manually. (For more information, refer to the Octopus Management Console Admin Guide.)
+    <img src=".//media/DirectoryType_1.png" style="width:2.78795in;height:2.57292in" />
 
-    <img src=".//media/image14.png" style="width:2.78795in;height:2.57292in" />
+1.  If you want directory users to be synced automatically, enable the **Directory Sync** toggle button. When Directory Sync is disabled (as in the example below) you will need to import users manually. (For more information, refer to the Octopus Management Console Admin Guide.)
+     
+     <img src=".//media/DirectoryType_2.png" style="width:2.78795in;height:2.57292in" />
 
 1.  Click **Select**.
 
     The **New** **Directory** page opens.
 
-1.  Configure the following parameters, based on your corporate AD settings:
+1.  Configure the following parameters, based on your corporate directory settings:
 
     <table>
     <thead>
@@ -215,28 +217,28 @@ Follow the procedure below to integrate your corporate directory with the Octopu
     <tbody>
     <tr class="odd">
     <td>Name</td>
-    <td>Corporate Active Directory Server name</td>
+    <td>Corporate Directory Server name</td>
     </tr>
     <tr class="even">
     <td>Base DN</td>
-    <td>Active Directory Distinguished Name; Active Directory top tree level, from where a server will search for users<br />
+    <td>Directory Distinguished Name; Directory top tree level, from where a server will search for users<br />
     (e.g., dc=&lt;AD name&gt;,dc=com)</td>
     </tr>
     <tr class="odd">
     <td>User DN</td>
-    <td>Active Directory Administrator User DN string (e.g., cn=administrator=users, dc=&lt;AD name&gt;,dc=com)</td>
+    <td>Directory Administrator User DN string (e.g., cn=administrator=users, dc=&lt;AD name&gt;,dc=com)</td>
     </tr>
     <tr class="even">
     <td>Password</td>
-    <td>Active Directory Administrator Principal’s password</td>
+    <td>Directory Administrator Principal’s password</td>
     </tr>
     <tr class="odd">
     <td>Host Name/URL</td>
-    <td>Corporate Active Directory URL (LDAP/LDAPS) and port</td>
+    <td>Corporate Directory URL (LDAP/LDAPS) and port</td>
     </tr>
     <tr class="even">
     <td>Upload Certificate</td>
-    <td>Active Directory LDAPS 64-base encoded root CA. If you are using LDAPS, click and upload the certificate file.</td>
+    <td>Directory LDAPS 64-base encoded root CA. If you are using LDAPS, click and upload the certificate file.</td>
     </tr>
     </tbody>
     </table>
@@ -249,13 +251,17 @@ Follow the procedure below to integrate your corporate directory with the Octopu
 
 ### Configuring Authentication Policies for the Directory
 
-After integrating your corporate AD, you need to specify instructions about which authentication options and methods are supported for it. The **Policy** tab of the directory settings enables you to configure:
+After integrating your corporate Directory, you need to specify instructions about which authentication options and methods are supported for it. The **Policy** tab of the directory settings allows you to select ForgeRock as a Primary and/or Secondary authenticator and specify one-time password (OTP) settings.
+
+When ForgeRock is selected as an authenticator (either Primary or Secondary), information including user agent, Source IP, etc. is sent to ForgeRock for additional policy enforcement or authentication.
+
+The procedure below explains how to configure the following settings in the **Policy** tab:
 
 -   **Supported authenticators:** ForgeRock Authenticator can function as a primary or secondary authenticator (or both).
 
     - **When ForgeRock is a Primary authenticator**, it can work alongside or instead of Octopus Authenticator. If both methods are enabled, users will be able to choose the authenticator they prefer.
 
-    - **When ForgeRock is a Secondary authenticator**, users first authenticate with another authentication method (not ForgeRock). Then, information is sent to ForgeRock for additional authentication. Information that is sent includes user agent, Source IP and the authentication that was used for the primary authenticator.
+    - **When ForgeRock is a Secondary authenticator**, users first authenticate with another authentication method (not ForgeRock). Then, information is sent to ForgeRock for additional policy enforcement or authentication. This information includes the usual headers as well as the authentication that was used for the primary authenticator.
 
 -   **OTP settings:** To enhance authentication capabilities, Secret Double Octopus provides the option of issuing a one-time password for login. You can enable either or both of these OTP options:
 
@@ -429,7 +435,7 @@ prerequisites are met. For details, refer to the [Prerequisites](#Prerequisites)
 
 **To install the MSIUpdater client:**
 
-1.  Run **MSIUpdater.exe**
+1.  Run **MSIUpdater.exe** as an administrator.
 
     If the Microsoft .NET Framework is not installed, an installer opens.
 
