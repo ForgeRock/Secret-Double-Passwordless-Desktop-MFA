@@ -1,4 +1,4 @@
-Octopus Authentication Module
+Octopus Credential Provider
 ============
 
 Octopus Authentication is a high-assurance, passwordless authentication system engineered to address the diverse authentication needs of a real-world, working enterprise.
