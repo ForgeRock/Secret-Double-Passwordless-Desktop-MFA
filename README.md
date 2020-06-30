@@ -770,7 +770,9 @@ You can send an enrollment invitation to a user directly from the Users List, or
 
     <img src=".//media/EnrollUser_2.png" style="width:3.30757in;height:2.18819in" />
 
-Octopus Support
+Contact Information
 ================================
 
-For technical assistance please contact us at support@doubleoctopus.com
+For technical assistance please contact support@doubleoctopus.com or frank.gasparovic@forgerock.com
+
+For additional information and questions related to business and purchasing, please contact sales@doubleoctopus.com
