@@ -1,21 +1,26 @@
-Octopus Credential Provider
+Octopus Passwordless Desktop MFA
 ============
 
-Octopus Authentication is a high-assurance, passwordless authentication system engineered to address the diverse authentication needs of a real-world, working enterprise.
+Secret Double Octopus’s Passwordless Enterprise™ is revolutionizing employee authentication throughout all corporate assets. Its high-assurance authentication solution is built on proprietary cryptography that is resistant to user-side and man-in-the-middle attacks while providing a smooth and universal user experience.
 
-Octopus Authentication replaces all employee passwords with a strong, password-free authentication mechanism. Our proprietary Windows Credential Provider works in conjunction with standard Active Directory interfaces to seamlessly deliver a stronger, more secure alternative to passwords.
+Secret Double Octopus’s partnership with ForgeRock enhances current deployments with unique features such as Passwordless MFA for desktops (Win, Mac or Linux), support for offline scenarios, and full compatibility with any modern or legacy corporate infrastructure, either on-premise or in the cloud. Adding the Octopus Authentication module to your ForgeRock platform eliminates the need to create, manage or remember passwords, directly resulting in increased security, uptime and productivity while decreasing support costs.
 
-A direct effect of eliminating passwords with the Octopus Authentication Module is a significant increase in security of AD domains, edge devices and remotely accessed services. Moreover, user experience becomes standardized, resulting in enhanced productivity and accessibility, and password management and support costs are dramatically lowered.
+When Secret Double Octopus’s Passwordless Enterprise™ is integrated with ForgeRock, users can choose the ForgeRock Authenticator app as an additional multifactor authentication method. Some supported use case scenarios are shown in the following figures.
 
-As part of the integration with ForgeRock, Secret Double Octopus allows users to choose the ForgeRock Authenticator app as an additional multifactor authentication method. 
-
-<img src=".//media/image3.png" style="width:6.52399in;height:3.0625in" />
+<img src=".//media/FRAuthentication_Figure1.png" style="width:6.52399in;height:3.0625in" />
 
 **Workstation Authentication using ForgeRock MFA with Push Authentication**
 
 <img src=".//media/image4.png" style="width:5.59373in;height:2.7867in" />
 
 **Workstation Authentication using ForgeRock MFA with OTP Authentication**
+
+Getting Started
+-------------------
+
+Before you begin, you will need to obtain installation packages for the Octopus Authentication Server and Windows Passwordless Desktop MFA from Secret Double Octopus. Please contact us at sales@doubleoctopus.com for assistance or for more information.
+
+For assistance with technical issues, please contact support@doubleoctopus.com or frank.gasparovic@forgerock.com
 
 <a name="Prerequisites">Prerequisites</a>
 -------------
@@ -38,9 +43,6 @@ Before beginning installation, verify that the following requirements are met:
 
 -   ForgeRock is installed and enrolled users are operating the mobile 
     ForgeRock Authenticator (Push or OTP)
-
--   The Octopus Authentication for Windows MSI and MSIUpdater packages
-    have been obtained from the Secret Double Octopus team
 
 Octopus Authentication for Windows supports all Windows versions:
 Windows 7, 8, 10 and Servers 2008, 2012 and 2016. Required Windows
@@ -268,6 +270,7 @@ The procedure below explains how to configure the following settings in the **Po
     - **Online OTP:** When enabled, enrolled users can log into Windows, Mac or the User Portal using a one-time password issued by either the Octopus Authenticator or by ForgeRock.
 
     - **Offline OTP:** When enabled, enrolled users can log into Windows, Mac or the User Portal using a one-time password that is stored locally. These OTPs are supplied by the Octopus Authenticator or by ForgeRock.
+    When using Active Directory, ForgeRock Offline OTP requires a link to the ForgeRock directory. For more information about using ForgeRock Offline OTP, please contact support@doubleoctopus.com
 
 **Note**: For more information about OTP enrollment, refer to [Appendix B: Enrolling Users for Octopus OTP](#AppB).
 
@@ -687,7 +690,7 @@ Windows ForgeRock Authentication
 Once installation is complete, the user can authenticate to a Windows machine using ForgeRock or a FIDO key (according to the configured
 setup). The different authentication flows are described below.
 
-<img src=".//media/image3.png" style="width:5.63542in;height:2.64539in" />
+<img src=".//media/FRAuthentication_Figure1.png" style="width:5.63542in;height:2.64539in" />
 
 #### ForgeRock MFA Authentication Flow (with ForgeRock Push):
 
@@ -770,9 +773,4 @@ You can send an enrollment invitation to a user directly from the Users List, or
 
     <img src=".//media/EnrollUser_2.png" style="width:3.30757in;height:2.18819in" />
 
-Contact Information
-================================
 
-For technical assistance please contact support@doubleoctopus.com or frank.gasparovic@forgerock.com
-
-For additional information and questions related to business and purchasing, please contact sales@doubleoctopus.com
