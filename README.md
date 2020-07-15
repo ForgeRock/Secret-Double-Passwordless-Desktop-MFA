@@ -25,7 +25,8 @@ For assistance with technical issues, please contact support@doubleoctopus.com o
 Prerequisites
 -------------------
 
-<a name="Prerequisites"/>Before beginning installation, verify that the following requirements are met:
+<a name="Prerequisites"/></a>
+Before beginning installation, verify that the following requirements are met:
 
 -   Octopus Authentication Server v4.6 (or higher) is installed and operating with a
     valid enterprise certificate (for User Portal and administrator
