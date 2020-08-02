@@ -414,6 +414,64 @@ Follow the steps below to create the required AD service and configure its setti
 
 1.  Click **Save** and then publish your changes.
 
+Launching the User's Dashboard
+===========================================
+
+Octopus Passwordless Desktop MFA supports the ability to automatically open the user’s dashboard upon user login to a Windows or Mac workstation. To enable this functionality, the following configurations need to be made:
+
+-   Add and configure the *winsso* tree on ForgeRock OpenAM. (See the section below for instructions.)
+
+-   When configuring the Octopus for Windows Agent, select one of the **Enable SSO** options and specify the *winsso* tree as the SSO URL. For details, refer to [Configuring the MSIUpdater Client](#ConfiguringMSI) (Step 7).
+
+Configuring the *winsso* Tree on OpenAM
+--------------------------------
+
+To support the dashboard launch, you need to create an additional tree (*winSSO*) in your ForgeRock environment. This tree is used by Windows to access the ForgeRock Portal.
+
+ ![](.//media/webssoTree.png)
+
+Parameters for the **Get Session Data** node are:
+
+ <table>
+    <thead>
+    <tr class="header">
+    <th><strong>Parameter</strong></th>
+    <th><strong>Value / Notes</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td>Session Data Key</td>
+    <td>The key to identify the user (<strong>UserId</strong>)</td>
+    </tr>
+    <tr class="even">
+    <td>Shared State Key</td>
+    <td>The shared state received from Octopus for Windows (<strong>username</strong>)</td>
+    </tr>
+    </tbody>
+    </table>
+
+![](.//media/GetSessionDataParams.png)
+
+The parameter for the **Sucess URL** node is:
+
+ <table>
+    <thead>
+    <tr class="header">
+    <th><strong>Parameter</strong></th>
+    <th><strong>Value / Notes</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td>Success URL/td>
+    <td>https://domain.com/openam/XUI/?service=Example#dashboard/</td>
+    </tr>
+    </tbody>
+    </table>
+
+![](.//media/SuccessURLParams.png)
+
 Windows Client Installation with MSIUpdater
 ===========================================
 
@@ -610,7 +668,7 @@ Alternatively, you can download all the service metadata at once by clicking **S
     <tbody>
       <tr class="even">
     <td>Enable SSO / Enable Third Party SSO</td>
-    <td><b>You may configure ONE of these settings only.</b> After selecting the checkbox, enter the portal URL / 3rd party portal URL. In runtime, the portal will open in the default browser. Users will be automatically logged in and be able to view all assigned services.</td>
+    <td><b>You may configure ONE of these settings only.</b> After selecting the checkbox, enter the portal URL / 3rd party portal URL (e.g., https://domain.com/openam/XUI/?Service=winsso). In runtime, the portal will open in the default browser. Users will be automatically logged in and be able to view all assigned services.</td>
     </tr>
     <tr class="odd">
     <td>Enable CP Bypass List</td>
