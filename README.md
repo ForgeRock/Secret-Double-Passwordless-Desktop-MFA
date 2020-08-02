@@ -464,7 +464,7 @@ The parameter for the **Sucess URL** node is:
     </thead>
     <tbody>
     <tr class="odd">
-    <td>Success URL/td>
+    <td>Success URL</td>
     <td>https://domain.com/openam/XUI/?service=Example#dashboard/</td>
     </tr>
     </tbody>
