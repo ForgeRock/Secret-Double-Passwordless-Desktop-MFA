@@ -46,7 +46,7 @@ Before beginning installation, verify that the following requirements are met:
     ForgeRock Authenticator (Push or OTP)
 
 Octopus Authentication for Windows supports all Windows versions:
-Windows 7, 8, 10 and Servers 2008, 2012 and 2016. Required Windows
+Windows 7, 8, 10 and Servers 2008, 2012, 2016 and 2019. Required Windows
 updates are listed in the table below.
 
 <table>
@@ -490,7 +490,7 @@ Installing the MSIUpdater Client
 
 The MSIUpdater client provides an update tool for basic MSI with the Corporate Octopus AD Authentication configuration. This enables MSI silent installation to corporate Windows clients.
 
-MSIUpdater can run on any Windows client running the following versions: Windows 7, 8, 10, Server 2002, 2008, 2010 and 2012.
+MSIUpdater can run on any Windows client running the following versions: Windows 7, 8, 10, Server 2008, 2008 R2, 2012, 2012 R2, 2016, 2019.
 
 Before you begin, verify that all system requirements and
 prerequisites are met. For details, refer to the [Prerequisites](#Prerequisites) section of this document.
