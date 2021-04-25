@@ -296,7 +296,7 @@ The procedure below explains how to configure the following settings in the **Po
 
     c. In the **OTP Configuration** section, set the parameters of algorithm, number of digits, time period for replacement of the OTP token, and amount of time for which users are allowed to authenticate offline.
 
-    <img src=".//media/OTPSettings.png" style="width:5.46692in;height:3.3125in" />
+    <img src=".//media/OTP_SettingsFR.png" style="width:5.46692in;height:3.3125in" />
 
 1.  At the bottom of the **Policy** tab, click **Save** and then publish your changes.
 
